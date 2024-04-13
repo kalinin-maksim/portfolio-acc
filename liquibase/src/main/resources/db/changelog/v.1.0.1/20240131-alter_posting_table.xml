@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog  http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+
+    <changeSet id="acc-alter_posting_table" author="---">
+
+        <renameColumn tableName="${prefix}posting" oldColumnName="branch" newColumnName="operation_branch"/>
+        <renameColumn tableName="${prefix}posting" oldColumnName="sign" newColumnName="side"/>
+        <renameColumn tableName="${prefix}posting" oldColumnName="event_type" newColumnName="accounting_event_type"/>
+
+        <modifyDataType tableName="${prefix}posting" columnName="accounting_id" newDataType="varchar(50)"/>
+        <modifyDataType tableName="${prefix}posting" columnName="source_of_posting" newDataType="varchar(256)"/>
+        <modifyDataType tableName="${prefix}posting" columnName="operation_branch" newDataType="varchar(4)"/>
+        <modifyDataType tableName="${prefix}posting" columnName="channel_name" newDataType="varchar(50)"/>
+        <modifyDataType tableName="${prefix}posting" columnName="event_id" newDataType="varchar(50)"/>
+        <modifyDataType tableName="${prefix}posting" columnName="deal_id" newDataType="varchar(50)"/>
+        <modifyDataType tableName="${prefix}posting" columnName="document_id" newDataType="varchar(50)"/>
+        <modifyDataType tableName="${prefix}posting" columnName="narrative" newDataType="varchar(250)"/>
+        <modifyDataType tableName="${prefix}posting" columnName="account_number" newDataType="varchar(100)"/>
+        <modifyDataType tableName="${prefix}posting" columnName="currency_code" newDataType="varchar(32)"/>
+        <modifyDataType tableName="${prefix}posting" columnName="amount" newDataType="numeric(30,15)"/>
+        <modifyDataType tableName="${prefix}posting" columnName="local_amount" newDataType="numeric(30,15)"/>
+
+        <addColumn tableName="${prefix}posting">
+            <column name="entry_id" type="varchar(255)"/>
+            <column name="posting_id" type="varchar(50)"/>
+            <column name="maker" type="varchar(256)"/>
+            <column name="checker" type="varchar(256)"/>
+            <column name="sub_deal_id" type="varchar(50)"/>
+            <column name="deal_type" type="varchar(256)"/>
+            <column name="status" type="varchar(50)"/>
+            <column name="reverse" type="varchar(1)"/>
+        </addColumn>
+
+    </changeSet>
+
+</databaseChangeLog>

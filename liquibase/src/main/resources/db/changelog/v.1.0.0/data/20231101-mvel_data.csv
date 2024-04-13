@@ -1,0 +1,2 @@
+id;name;log_exp;result_exp
+F8CBF8C9ABB14AC7AD4CE74F8E9BFD78;rule_01;systemId == 'land' && moduleId == 'FT' && eventType == 'TO_SUSP' && reverse == 'N' && paymentDirection == 'IN' && paymentDirection == 'IN' && debitCurrencyCode == 'INR' && creditCurrencyCode == 'INR';new edu.kalinin.acc.data.Output("3030000000023RUB0232", "256050301", null, null)

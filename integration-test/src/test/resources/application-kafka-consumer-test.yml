@@ -1,0 +1,24 @@
+spring:
+  kafka:
+    bootstrap-servers: ${spring.embedded.kafka.brokers}
+    consumer:
+      auto-offset-reset: earliest
+      group-id: test-group
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+  datasource:
+    driver-class-name: org.hsqldb.jdbc.JDBCDriver
+    url: jdbc:hsqldb:mem:test
+    username: sa
+    password:
+kafka:
+  consumers-group: band
+  message:
+    topic-name: test
+    dead-letter:
+      enabled: true
+      topic-name: test-dead-letter
+    consumer:
+      enabled: true

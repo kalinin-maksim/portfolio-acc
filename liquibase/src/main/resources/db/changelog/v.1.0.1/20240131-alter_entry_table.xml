@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog  http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+
+    <changeSet id="acc-alter_entry_table" author="---">
+
+        <dropColumn tableName="${prefix}entry">
+            <column name="debit_account_key"/>
+            <column name="credit_account_key"/>
+        </dropColumn>
+
+        <renameColumn tableName="${prefix}entry" oldColumnName="chaker" newColumnName="checker"/>
+        <renameColumn tableName="${prefix}entry" oldColumnName="value_date" newColumnName="debit_value_date"/>
+        <renameColumn tableName="${prefix}entry" oldColumnName="branch" newColumnName="operation_branch"/>
+        <renameColumn tableName="${prefix}entry" oldColumnName="event_type" newColumnName="accounting_event_type"/>
+        <renameColumn tableName="${prefix}entry" oldColumnName="reversal" newColumnName="reverse"/>
+
+        <modifyDataType tableName="${prefix}entry" columnName="operation_branch" newDataType="varchar(4)"/>
+        <modifyDataType tableName="${prefix}entry" columnName="accounting_id" newDataType="varchar(50)"/>
+        <modifyDataType tableName="${prefix}entry" columnName="event_id" newDataType="varchar(50)"/>
+        <modifyDataType tableName="${prefix}entry" columnName="accounting_event_type" newDataType="varchar(32)"/>
+        <modifyDataType tableName="${prefix}entry" columnName="maker" newDataType="varchar(256)"/>
+        <modifyDataType tableName="${prefix}entry" columnName="checker" newDataType="varchar(256)"/>
+        <modifyDataType tableName="${prefix}entry" columnName="channel_name" newDataType="varchar(50)"/>
+        <modifyDataType tableName="${prefix}entry" columnName="deal_id" newDataType="varchar(50)"/>
+        <modifyDataType tableName="${prefix}entry" columnName="document_id" newDataType="varchar(50)"/>
+        <modifyDataType tableName="${prefix}entry" columnName="debit_account" newDataType="varchar(100)"/>
+        <modifyDataType tableName="${prefix}entry" columnName="credit_account" newDataType="varchar(100)"/>
+        <modifyDataType tableName="${prefix}entry" columnName="debit_currency_code" newDataType="varchar(32)"/>
+        <modifyDataType tableName="${prefix}entry" columnName="credit_currency_code" newDataType="varchar(32)"/>
+        <modifyDataType tableName="${prefix}entry" columnName="narrative" newDataType="varchar(250)"/>
+        <modifyDataType tableName="${prefix}entry" columnName="reverse" newDataType="varchar(1)"/>
+        <modifyDataType tableName="${prefix}entry" columnName="reversal_reference" newDataType="varchar(50)"/>
+        <modifyDataType tableName="${prefix}entry" columnName="multi_offset" newDataType="varchar(1)"/>
+        <modifyDataType tableName="${prefix}entry" columnName="operation_time_stamp" newDataType="varchar(256)"/>
+        <modifyDataType tableName="${prefix}entry" columnName="source_of_posting" newDataType="varchar(256)"/>
+        <modifyDataType tableName="${prefix}entry" columnName="rule_name" newDataType="varchar(255)"/>
+        <modifyDataType tableName="${prefix}entry" columnName="posting_description" newDataType="varchar(255)"/>
+        <modifyDataType tableName="${prefix}entry" columnName="debit_amount" newDataType="numeric(30,15)"/>
+        <modifyDataType tableName="${prefix}entry" columnName="credit_amount" newDataType="numeric(30,15)"/>
+        <modifyDataType tableName="${prefix}entry" columnName="debit_local_amount" newDataType="numeric(30,15)"/>
+        <modifyDataType tableName="${prefix}entry" columnName="credit_local_amount" newDataType="numeric(30,15)"/>
+        <addColumn tableName="${prefix}entry">
+            <column name="sub_deal_id" type="varchar(50)"/>
+            <column name="deal_type" type="varchar(256)"/>
+            <column name="multi_offset_reference" type="varchar(50)"/>
+            <column name="credit_value_date" type="date"/>
+            <column name="event_date" type="date"/>
+            <column name="parent_accounting_id" type="varchar(50)"/>
+        </addColumn>
+
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <property name="uuid_type" value="VARCHAR(32)" dbms="postgresql"/>
+    <property name="prefix" value="acc_" dbms="postgresql"/>
+
+    <property name="uuid_function" value="ext.uuid_generate_v4()" dbms="postgresql"/>
+    <property name="current_date" value="CURRENT_TIMESTAMP" dbms="postgresql"/>
+
+    <property name="uuid_type" value="VARCHAR(255)" dbms="h2"/>
+    <property name="prefix" value="acc_" dbms="h2"/>
+    <property name="accounting.schema.name" value="acc" dbms="h2"/>
+
+    <includeAll path="v.1.0.0" relativeToChangelogFile="true"/>
+    <changeSet id="fill_data" author="---">
+        <customChange class="edu.migration.FillData" >
+
+        </customChange>
+    </changeSet>
+    <includeAll path="v.1.0.1" relativeToChangelogFile="true"/>
+
+</databaseChangeLog>

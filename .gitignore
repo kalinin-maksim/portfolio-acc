@@ -1,0 +1,10 @@
+*.iml
+/.idea/**
+**/target/
+**/node_modules/
+**/node/
+**/.DS_Store
+/.idea/
+**/.jmix/
+
+*-local.yaml

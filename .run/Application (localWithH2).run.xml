@@ -1,0 +1,15 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Application (localWithH2)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <output_file path="C:\Temp\IdeaLog\console.log" is_save="true" />
+    <module name="edu-kalinin-acc-application" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="edu.kalinin.acc.Application" />
+    <option name="VM_PARAMETERS" value="-DstandId=localWithH2" />
+    <extension name="com.egoshard.intellij.k8s-runtime-config-plugin">
+      <option name="ENABLED" value="false" />
+      <entries />
+    </extension>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

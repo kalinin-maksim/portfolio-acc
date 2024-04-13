@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog  http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+
+    <changeSet id="acc-alter_entry_table" author="---">
+        
+        <modifyDataType tableName="${prefix}account_balance" columnName="opening_balance" newDataType="numeric(30,15)"/>
+        <modifyDataType tableName="${prefix}account_balance" columnName="opening_balance_local" newDataType="numeric(30,15)"/>
+        <modifyDataType tableName="${prefix}account_balance" columnName="closing_balance" newDataType="numeric(30,15)"/>
+        <modifyDataType tableName="${prefix}account_balance" columnName="closing_balance_local" newDataType="numeric(30,15)"/>
+        <modifyDataType tableName="${prefix}account_balance" columnName="dr_turnover" newDataType="numeric(30,15)"/>
+        <modifyDataType tableName="${prefix}account_balance" columnName="dr_turnover_local" newDataType="numeric(30,15)"/>
+        <modifyDataType tableName="${prefix}account_balance" columnName="cr_turnover" newDataType="numeric(30,15)"/>
+        <modifyDataType tableName="${prefix}account_balance" columnName="cr_turnover_local" newDataType="numeric(30,15)"/>
+
+    </changeSet>
+
+</databaseChangeLog>

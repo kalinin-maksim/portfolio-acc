@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "number": {
+      "type": "string"
+    },
+    "currencyCode": {
+      "type": "string"
+    },
+    "classCode": {
+      "type": "string"
+    },
+    "branch": {
+      "type": "string"
+    },
+    "dealId": {
+      "type": "string"
+    },
+    "state": {
+      "type": "string"
+    },
+    "openedDate": {
+      "type": "string"
+    },
+    "closedDate": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "accountId",
+    "accountNumber",
+    "isoCurrencyCode",
+    "branchCode",
+    "accountClassId",
+    "openDate",
+    "state",
+    "accountClass"
+  ]
+}

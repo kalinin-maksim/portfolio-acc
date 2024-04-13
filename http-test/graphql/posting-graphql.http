@@ -1,0 +1,74 @@
+###graphql: getPostingsByFilters(accountNumber==256050301 and amount>=169000)
+POST {{host}}/{{service}}/graphql
+Content-Type: application/json;charset=UTF-8
+
+{
+  "query": "{ getPostingsByFilters(filters: [{field: \"accountNumber\", compareType: eq, value: \"256050301\"},{field: \"amount\", compareType: gte, value: \"169000\"}]) { accountingEventType, accountingId, accountNumber, active, amount, bookingDate, channelName, checker, currencyCode, customer, customerName, dealId, dealType, documentId, entryId, eventId, id, localAmount, maker, narrative, operationBranch, operationTimeStamp, postingId, valueDate, reverse, seq, side, sourceOfPosting, status, subDealId } }"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.body.data.getPostingsByFilters.length === 3, "Response isn't valid");
+});
+%}
+
+###graphql: getPostingsByFilters(valueDate between (2024-10-23 and 2024-10-23) and amount>=169000)
+POST {{host}}/{{service}}/graphql
+Content-Type: application/json;charset=UTF-8
+
+{
+  "query": "{ getPostingsByFilters(filters: [{field: \"valueDate\", compareType: between, value: [\"2024-10-23\",\"2024-10-23\"]},{field: \"amount\", compareType: gte, value: \"169000\"}]) { accountingEventType, accountingId, accountNumber, active, amount, bookingDate, channelName, checker, currencyCode, customer, customerName, dealId, dealType, documentId, entryId, eventId, id, localAmount, maker, narrative, operationBranch, operationTimeStamp, postingId, valueDate, reverse, seq, side, sourceOfPosting, status, subDealId } }"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.body.data.getPostingsByFilters.length === 8, "Response isn't valid");
+});
+%}
+
+###graphql: getPostingsByFilters(side eq D)
+POST {{host}}/{{service}}/graphql
+Content-Type: application/json;charset=UTF-8
+
+{
+  "query": "{ getPostingsByFilters(filters: [{field: \"side\", compareType: eq, value: \"D\"}]) { accountingEventType, accountingId, accountNumber, active, amount, bookingDate, channelName, checker, currencyCode, customer, customerName, dealId, dealType, documentId, entryId, eventId, id, localAmount, maker, narrative, operationBranch, operationTimeStamp, postingId, valueDate, reverse, seq, side, sourceOfPosting, status, subDealId } }"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.body.data.getPostingsByFilters.length === 8, "Response isn't valid");
+});
+%}
+
+###graphql: getPostingsByFilters(active eq true)
+POST {{host}}/{{service}}/graphql
+Content-Type: application/json;charset=UTF-8
+
+{
+  "query": "{ getPostingsByFilters(filters: [{field: \"active\", compareType: eq, value: \"true\"}]) { accountingEventType, accountingId, accountNumber, active, amount, bookingDate, channelName, checker, currencyCode, customer, customerName, customerName, dealId, dealType, documentId, entryId, eventId, id, localAmount, maker, narrative, operationBranch, operationTimeStamp, postingId, valueDate, reverse, seq, side, sourceOfPosting, status, subDealId } }"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.body.data.getPostingsByFilters.length === 16, "Response isn't valid");
+});
+%}
+
+###graphql: getPostingReport(active eq true)
+POST {{host}}/{{service}}/graphql
+Content-Type: application/json;charset=UTF-8
+
+{
+  "query": "{ getPostingReport(filters: [{field: \"active\", compareType: eq, value: \"true\"}])}"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.body.data.getPostingReport.size > 0, "Response isn't valid");
+});
+%}

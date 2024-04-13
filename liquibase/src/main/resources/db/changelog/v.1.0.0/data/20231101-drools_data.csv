@@ -1,0 +1,7 @@
+id;name;body;pattern;result
+58CF012B3FDC418EBBE729DE4BEE452D;rule_01;;systemId == ""land"", moduleId == ""FT"", eventType == ""TO_SUSP"", reverse == ""N"", paymentDirection == ""IN"", debitCurrencyCode == ""INR"", creditCurrencyCode == ""INR"";debitAccount = ""3060000002010INR001D"", creditAccount = ""256050301""
+98XUR0NLLU56UCZUM8MJIQZYZBN5DNQW;rule_02;"when input: Input(systemId == ""land"", moduleId == ""FT"", eventType == ""FROM_SUSP"", reverse == ""N"", paymentDirection == ""IN"", debitCurrencyCode == ""INR"", creditCurrencyCode == ""INR"")
+                                          then outputs.add(new Output(""256050301"", input.beneficiaryBankCode.equals(""INSABR0000001"") ? input.beneficiaryAccount : ""3050000002015FRF001M"", """", """"))";;
+CAY5HJ9HQE9I8DKD1URYO3IP7HDURKR9;rule_03;"when input: Input(systemId == ""land"", moduleId == ""FT"", eventType == ""TO_SUSP"", reverse == ""Y"", paymentDirection == ""IN"", debitCurrencyCode == ""INR"", creditCurrencyCode == ""INR"")
+                                          then outputs.add(new Output(""256050301"", ""3060000002010INR001D"", """", """"))";;
+TS4VP01AQIAPOPMP48JCCRJSDVDCCQLV;rule_04;;systemId == ""land"", moduleId == ""FT"", eventType == ""FROM_SUSP"", reverse == ""Y"", paymentDirection == ""IN"", debitCurrencyCode == ""INR"", creditCurrencyCode == ""INR""; debitAccount = input.beneficiaryBankCode == ""INSABR0000001"" ? input.beneficiaryAccount : ""3050000002015FRF001M"", creditAccount = ""256050301""

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>edu.kalinin.acc</groupId>
+        <artifactId>edu-kalinin-acc</artifactId>
+        <version>${revision}</version>
+    </parent>
+    <name>entry-fabric</name>
+    <artifactId>edu-kalinin-acc-entry-fabric</artifactId>
+    <version>${revision}</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>processor</module>
+        <module>persistence</module>
+    </modules>
+</project>

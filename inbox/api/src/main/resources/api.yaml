@@ -1,0 +1,20 @@
+openapi: 3.0.1
+info:
+  title: API
+  version: '1'
+paths:
+  /message:
+    get:
+      tags:
+        - message
+      summary: Returns a messages
+      description: Returns a messages
+      operationId: getMessages
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                $ref: 'schema/Message.json'

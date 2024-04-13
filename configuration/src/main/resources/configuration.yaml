@@ -1,0 +1,76 @@
+environment:
+  standId: ${standId}
+  database:
+    schema: ${backend_database_schema:acc}
+
+application:
+  name: edu-kalinin-acc
+  processor:
+    rate-sec: "#{'${environment.standId}' == 'localWithH2' ? 5 : 30}"
+    old-message:
+      rate-sec: 60
+    bad-message-feedback:
+      rate-sec: 300
+  outbox:
+    job:
+      rate-sec: "#{'${environment.standId}' == 'localWithH2' ? 5 : 30}"
+
+kafka:
+  consumers-group: accounting_${environment.standId}_${environment.database.schema}
+  producer-group: accounting_${environment.standId}_${environment.database.schema}
+  message:
+    topic-name: land.FT.TO.GL.PAYMENTS.EVENT
+    out-topic-name: land.FT.TO.GL.PAYMENTS.RECEIPT
+    dead-letter:
+      enabled: true
+      topic-name: land.FT.TO.GL.PAYMENTS.RECEIPT
+    consumer:
+      enabledExp: "'${spring.kafka.bootstrap-servers}' != ''"
+  loan:
+    topic-name: land.LOANS.TO.GL.EVENT
+    out-topic-name: land.LOANS.TO.GL.RECEIPT
+    consumer:
+      enabledExp: "'${spring.kafka.bootstrap-servers}' != ''"
+
+integration:
+  topics-in:
+    FT: ${kafka.message.topic-name}
+    LOANS: ${kafka.loan.topic-name}
+  topics-out:
+    FT: ${kafka.message.dead-letter.topic-name}
+    LOANS: ${kafka.loan.out-topic-name}
+
+crypto:
+  client:
+    enabled: true
+
+graphql:
+  servlet:
+    enabled: true
+    mapping: /graphql
+    cors-enabled: true
+    cors:
+      #      allowed-origins: http://some.domain.com
+      allowed-methods: GET, HEAD, POST
+      max-age: 1800
+graphiql:
+  enabled: true
+  mapping: /graphiql
+  endpoint:
+    graphql: /graphql
+
+spring:
+  mvc:
+    servlet:
+      path: /api/v1
+  application:
+    name: ${application.name}
+  profiles:
+    active: ${environment.standId}
+    group:
+      localWithH2: db-memory,kafka-local,flexcube-local,fc-accounting-adapter-test,graphql-local
+      localWithPostgres: db-dev,kafka-local,flexcube-local,fc-accounting-adapter-test,graphql-local
+      dev: db-dev,kafka-dev,flexcube-common,fc-accounting-adapter-test
+      ift: db-ift,kafka-ift,flexcube-common,fc-accounting-adapter-test
+      psi: db-psi,kafka-psi,flexcube-common,fc-accounting-adapter-prom
+      prom: db-prom,kafka-prom,flexcube-common,fc-accounting-adapter-prom

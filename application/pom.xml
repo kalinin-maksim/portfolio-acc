@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>edu.kalinin.acc</groupId>
+        <artifactId>edu-kalinin-acc</artifactId>
+        <version>${revision}</version>
+    </parent>
+
+    <artifactId>edu-kalinin-acc-application</artifactId>
+
+    <dependencies>
+        <!--<editor-fold desc="spring-boot-starter">-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <!--</editor-fold>-->
+
+        <dependency>
+            <groupId>net.logstash.logback</groupId>
+            <artifactId>logstash-logback-encoder</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-core</artifactId>
+            <version>${liquibase-core.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>edu.kalinin.acc</groupId>
+            <artifactId>edu-kalinin-acc-liquibase</artifactId>
+            <version>${revision}</version>
+        </dependency>
+
+        <!--<editor-fold desc="edu-kalinin-acc">-->
+        <dependency>
+            <groupId>edu.kalinin.acc</groupId>
+            <artifactId>edu-kalinin-acc-inbox-producer</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>edu.kalinin.acc</groupId>
+            <artifactId>edu-kalinin-acc-inbox-consumer</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>edu.kalinin.acc</groupId>
+            <artifactId>edu-kalinin-acc-entry-fabric-processor</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>edu.kalinin.acc</groupId>
+            <artifactId>edu-kalinin-acc-account-fabric-api</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>edu.kalinin.acc</groupId>
+            <artifactId>edu-kalinin-acc-general-ledger-processor</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>edu.kalinin.acc</groupId>
+            <artifactId>edu-kalinin-acc-outbox-sender</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>edu.kalinin.acc</groupId>
+            <artifactId>edu-kalinin-acc-general-ledger-api</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>edu.kalinin.acc</groupId>
+            <artifactId>edu-kalinin-acc-api-graphql</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>edu.kalinin.acc</groupId>
+            <artifactId>edu-kalinin-acc-liquibase</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <!--</editor-fold>-->
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <skip>false</skip>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                        <configuration>
+                            <classifier>full</classifier>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

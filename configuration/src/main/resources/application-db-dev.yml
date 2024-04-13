@@ -1,0 +1,26 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${backend_database_url}
+    username:
+    password:
+    hikari:
+      schema: ${backend_database_schema}
+  liquibase:
+    enabled: false
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+        generate_statistics: true
+        cache:
+          use_second_level_cache: true
+          use_query_cache: true
+          region:
+            factory_class: org.hibernate.cache.jcache.JCacheRegionFactory
+        javax:
+          cache:
+            provider: org.ehcache.jsr107.EhcacheCachingProvider
+    hibernate:
+      ddl-auto: none
+    show-sql: true

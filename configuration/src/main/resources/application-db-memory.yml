@@ -1,0 +1,21 @@
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:accounting-inbox;INIT=RUNSCRIPT FROM 'classpath:db-memory-init.sql'
+    username: ${DATASOURCE_USERNAME}
+    password: ${DATASOURCE_PASSWORD}
+  liquibase:
+    enabled: true
+    contexts: h2
+    change-log: classpath:db/changelog/all_changelog.xml
+    default-schema: acc
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        default_schema: acc
+    show-sql: true
+  h2:
+    console:
+      enabled: true

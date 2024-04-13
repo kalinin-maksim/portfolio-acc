@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>edu.kalinin.acc</groupId>
+        <artifactId>edu-kalinin-acc</artifactId>
+        <version>${revision}</version>
+    </parent>
+    <name>api-graphql</name>
+    <artifactId>edu-kalinin-acc-api-graphql</artifactId>
+    <version>${revision}</version>
+
+    <dependencies>
+        <!--<editor-fold desc="edu-kalinin-acc">-->
+        <dependency>
+            <groupId>edu.kalinin.acc</groupId>
+            <artifactId>edu-kalinin-acc-general-ledger-persistence</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <!--</editor-fold>-->
+
+        <dependency>
+            <groupId>com.graphql-java-kickstart</groupId>
+            <artifactId>graphql-spring-boot-starter</artifactId>
+            <version>${graphql.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.graphql-java</groupId>
+            <artifactId>graphql-java-extended-scalars</artifactId>
+            <version>20.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.9.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct</artifactId>
+            <version>${org.mapstruct.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct-processor</artifactId>
+            <version>${org.mapstruct.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!--region TEST-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.instancio</groupId>
+            <artifactId>instancio-junit</artifactId>
+            <version>${instancio-junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <!--endregion-->
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <compilerArguments>
+                        <processor>
+                            lombok.launch.AnnotationProcessorHider$AnnotationProcessor,org.mapstruct.ap.MappingProcessor
+                        </processor>
+                    </compilerArguments>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.graphql-java-generator</groupId>
+                <artifactId>graphql-maven-plugin</artifactId>
+                <version>1.17.3</version>
+            </plugin>
+            <plugin>
+                <groupId>com.graphql-java-generator</groupId>
+                <artifactId>graphql-maven-plugin</artifactId>
+                <configuration>
+                    <customScalars>
+                        <customScalar>
+                            <graphQLTypeName>DownloadedFile</graphQLTypeName>
+                            <javaType>edu.kalinin.acc.dto.DownloadedFile</javaType>
+                        </customScalar>
+                    </customScalars>
+                    <schemaFileFolder>${project.basedir}/src/main/resources/graphql</schemaFileFolder>
+                    <separateUtilityClasses>true</separateUtilityClasses>
+                    <packageName>edu.kalinin.acc.graphql</packageName>
+                    <generateDeprecatedRequestResponse>false</generateDeprecatedRequestResponse>
+                    <mode>server</mode>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals><goal>generatePojo</goal></goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

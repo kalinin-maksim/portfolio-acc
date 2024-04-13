@@ -1,0 +1,16 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog  http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+
+    <changeSet id="acc-create-posting-view" author="---">
+        <createView viewName="${prefix}posting_journal" replaceIfExists="true">
+            select p.*,
+                   dense_rank() over
+                (partition by posting_id order by side desc, id) seq,
+                        (select flexcube_customer_id from ${accounting.schema.name}.acc_account where id=account_number) customer
+            from ${accounting.schema.name}.acc_posting p
+            order by event_id, posting_id, side desc, id
+        </createView>
+    </changeSet>
+</databaseChangeLog>

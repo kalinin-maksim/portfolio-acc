@@ -1,0 +1,38 @@
+spring:
+  config:
+    import: 'configuration.yaml'
+
+server:
+  shutdown: graceful
+  port: 8080
+management:
+  server:
+    port: 8081
+  health:
+    readinessstate:
+      enabled: true
+    livenessstate:
+      enabled: true
+  endpoint:
+    health:
+      probes:
+        enabled: true
+      group:
+        liveness:
+          include:
+            - livenessState
+        readiness:
+          include:
+            - readinessState
+            - applicationContextState
+      show-details: always
+      show-components: always
+      cache:
+        time-to-live: 1s
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  metrics:
+    tags:
+      application: ${spring.application.name}

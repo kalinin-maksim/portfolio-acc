@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: acc
+  labels:
+    app: acc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: acc
+  template:
+    metadata:
+      name: acc
+      labels:
+        app: acc
+    spec:
+      containers:
+        - name: acc
+          image: docker.io/library/acc
+          imagePullPolicy: IfNotPresent
+          env:
+          - name: standId
+            value: localWithH2
+          envFrom:
+            - secretRef:
+                name: credit-storage
+          volumeMounts:
+            - name: secret-volume
+              mountPath: /etc/secret-volume
+        - name: inbox
+          image: docker.io/library/inbox
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: standId
+              value: localWithH2
+      volumes:
+        - name: secret-volume
+          secret:
+            secretName: credit-storage
+      restartPolicy: Always

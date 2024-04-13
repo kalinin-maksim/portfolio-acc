@@ -1,0 +1,4 @@
+FROM adoptopenjdk/openjdk11
+VOLUME /tmp
+COPY inbox/consumer/target/edu-kalinin-acc-inbox-consumer-0.0.1-SNAPSHOT-full.jar app.jar
+ENTRYPOINT ["java","-jar","/app.jar"]

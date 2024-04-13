@@ -1,0 +1,202 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "Event",
+  "required": [
+    "header",
+    "body"
+  ],
+  "properties": {
+    "header": {
+      "$ref": "#/definitions/BaseDTO"
+    },
+    "body": {
+      "$ref": "#/definitions/PaymentDto"
+    },
+    "version": {
+      "type": "integer"
+    }
+  },
+  "definitions": {
+    "BaseDTO": {
+      "type": "object",
+      "properties": {
+        "accountingId": {
+          "type": "integer"
+        },
+        "eventId": {
+          "type": "string"
+        },
+        "parentEventId": {
+          "type": "string"
+        },
+        "systemId": {
+          "type": "string"
+        },
+        "moduleId": {
+          "type": "string"
+        },
+        "eventType": {
+          "type": "string"
+        },
+        "maker": {
+          "type": "string"
+        },
+        "chaker": {
+          "type": "string"
+        },
+        "eventDate": {
+          "type": "string",
+          "pattern": "\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|1[0-9]|2[0-9]|3[0-1])"
+        },
+        "dealType": {
+          "type": "string"
+        },
+        "operationTimeStamp": {
+          "type": "string",
+          "pattern": "\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|1[0-9]|2[0-9]|3[0-1])T(?:[01]\\d|2[0123]):([012345]\\d):([012345]\\d)((\\.\\d{1,6})?(([+\\-]\\d{2}:\\d{2})|Z)?)"
+        },
+        "reverse": {
+          "type": "string"
+        },
+        "multiOffset": {
+          "type": "string"
+        },
+        "amountBlockSystemCode": {
+          "type": "string"
+        },
+        "amountBlockId": {
+          "type": "string"
+        },
+        "operationCountryCode": {
+          "type": "string"
+        },
+        "branch": {
+          "type": "string"
+        }
+      }
+    },
+    "PaymentDto": {
+      "type": "object",
+      "properties": {
+        "documentId": {
+          "type": "string"
+        },
+        "channelName": {
+          "type": "string"
+        },
+        "payerClientId": {
+          "type": "string"
+        },
+        "payerBranchCode": {
+          "type": "string"
+        },
+        "payerClientType": {
+          "type": "string"
+        },
+        "payerBankCode": {
+          "type": "string"
+        },
+        "payerAccount": {
+          "type": "string"
+        },
+        "payerCorrespondentAccount": {
+          "type": "string"
+        },
+        "beneficiaryClientId": {
+          "type": "string"
+        },
+        "beneficiaryBranchCode": {
+          "type": "string"
+        },
+        "beneficiaryClientType": {
+          "type": "string"
+        },
+        "beneficiaryBankCode": {
+          "type": "string"
+        },
+        "beneficiaryAccount": {
+          "type": "string"
+        },
+        "beneficiaryCorrespondentAccount": {
+          "type": "string"
+        },
+        "debitAmount": {
+          "type": "number"
+        },
+        "creditAmount": {
+          "type": "number"
+        },
+        "debitCurrencyCode": {
+          "type": "string"
+        },
+        "creditCurrencyCode": {
+          "type": "string"
+        },
+        "debitValueDate": {
+          "type": "string",
+          "pattern": "\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|1[0-9]|2[0-9]|3[0-1])"
+        },
+        "creditValueDate": {
+          "type": "string",
+          "pattern": "\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|1[0-9]|2[0-9]|3[0-1])"
+        },
+        "purpose": {
+          "type": "string"
+        },
+        "purposeCode": {
+          "type": "string"
+        },
+        "returnCode": {
+          "type": "string"
+        },
+        "externalId": {
+          "type": "string"
+        },
+        "cardFile": {
+          "type": "string"
+        },
+        "cardAccount": {
+          "type": "string"
+        },
+        "commissionCode": {
+          "type": "string"
+        },
+        "commissionKind": {
+          "type": "string"
+        },
+        "commissionAmount": {
+          "type": "number"
+        },
+        "commissionCurrencyCode": {
+          "type": "string"
+        },
+        "suspenseReasonCode": {
+          "type": "string"
+        },
+        "paymentDirection": {
+          "type": "string"
+        },
+        "methodType": {
+          "type": "string"
+        }
+      }
+    },
+    "type": "object",
+    "properties": {
+      "body": {
+        "anyOf": [
+          {
+            "$ref": "#/definitions/PaymentDto"
+          }
+        ]
+      },
+      "header": {
+        "$ref": "#/definitions/BaseDTO"
+      },
+      "version": {
+        "type": "integer"
+      }
+    }
+  }
+}

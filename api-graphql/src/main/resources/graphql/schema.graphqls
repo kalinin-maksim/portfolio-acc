@@ -1,0 +1,63 @@
+scalar DownloadedFile
+
+schema {
+    query: Query
+}
+
+type Query {
+    #-general-ledger
+    getPostingsByFilters(filters: [Filter]): [PostingOutput]
+    getPostingReport(filters: [Filter]): DownloadedFile
+
+}
+#-begin general-ledger
+type PostingOutput {
+    accountingEventType: String
+    accountingId: String
+    accountNumber: String
+    active: String
+    amount: String
+    bookingDate: String
+    channelName: String
+    checker: String
+    currencyCode: String
+    customer: String
+    customerName: String
+    dealId: String
+    dealType: String
+    documentId: String
+    entryId: String
+    eventId: String
+    id: String
+    localAmount: String
+    maker: String
+    narrative: String
+    operationBranch: String
+    operationTimeStamp: String
+    postingId: String
+    valueDate: String
+    reverse: String
+    seq: String
+    side: String
+    sourceOfPosting: String
+    status: String
+    subDealId: String
+}
+
+input Filter{
+    field: String!
+    compareType: ComparisonType!
+    value: [String]!
+}
+
+enum ComparisonType {
+    eq
+    neq
+    like
+    gt
+    gte
+    lt
+    lte
+    between
+}
+#-end general-ledger

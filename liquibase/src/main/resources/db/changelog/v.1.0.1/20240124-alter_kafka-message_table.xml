@@ -1,0 +1,15 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog  http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+
+    <changeSet id="acc-alter_kafka-message_table" author="---">
+        <addColumn tableName="${prefix}kafka_message">
+            <column name="attempt_count"
+                    type="number(100)"/>
+            <column name="error_message"
+                    type="VARCHAR2(4096)"/>
+        </addColumn>
+    </changeSet>
+
+</databaseChangeLog>

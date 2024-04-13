@@ -1,0 +1,781 @@
+###create an account
+POST {{host}}/{{service}}/{{path}}/account/3060/1
+Content-Type: application/json
+
+{
+  "branch": "001",
+  "currencyCode": "INR",
+  "flexcubeCustomerId": "000002010",
+  "customerId": "CIF111000002010",
+  "dealId": "CL23209001",
+  "customerType": "Corporate"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.body.number === "3060000002010INR001D", "Response isn't valid");
+});
+%}
+
+###an account with similar input is not created
+POST {{host}}/{{service}}/{{path}}/account/3060/1
+Content-Type: application/json
+
+{
+  "branch": "001",
+  "currencyCode": "INR",
+  "flexcubeCustomerId": "000002010",
+  "customerId": "CIF111000002010",
+  "dealId": "CL23209001",
+  "customerType": "Corporate"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.body.number === "3060000002010INR001D", "Response isn't valid");
+});
+%}
+
+###get an account by customerId
+GET {{host}}/{{service}}/{{path}}/account/customer/000002010
+Content-Type: application/json
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.body.length === 1, "Account not found");
+});
+%}
+
+###create an account with counter 001
+POST {{host}}/{{service}}/{{path}}/account/4253/1
+Content-Type: application/json
+
+{
+  "branch": "001",
+  "currencyCode": "INR",
+  "flexcubeCustomerId": "000002011",
+  "customerId": "CIF111000002011",
+  "dealId": "CL23209001",
+  "customerType": "Corporate"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.body.number === "4253000002011INR001W", "Response isn't valid");
+});
+%}
+
+###create an account with counter 002
+POST {{host}}/{{service}}/{{path}}/account/4253/1
+Content-Type: application/json
+
+{
+  "branch": "001",
+  "currencyCode": "INR",
+  "flexcubeCustomerId": "000002011",
+  "customerId": "CIF111000002011",
+  "dealId": "CL23209002",
+  "customerType": "Corporate"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.body.number === "4253000002011INR002X", "Response isn't valid");
+});
+%}
+
+###check that an account with counter 003 is NOT created
+POST {{host}}/{{service}}/{{path}}/account/4253/1
+Content-Type: application/json
+
+{
+  "branch": "001",
+  "currencyCode": "INR",
+  "flexcubeCustomerId": "000002011",
+  "customerId": "CIF111000002011",
+  "dealId": "CL23209002",
+  "customerType": "Corporate"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.body.number === "4253000002011INR002X", "Response isn't valid");
+});
+%}
+
+###get 2 accounts with counters 001, 002 by customerID
+GET {{host}}/{{service}}/{{path}}/account/customer/000002011
+Content-Type: application/json
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.body.length === 2, "Account not found");
+});
+%}
+
+###create three accounts for one customerID without counter increment #1
+POST {{host}}/{{service}}/{{path}}/account/C001/1
+Content-Type: application/json
+
+{
+  "branch": "001",
+  "currencyCode": "CAD",
+  "flexcubeCustomerId": "000002015",
+  "customerId": "CIF111000002015",
+  "dealId": "CL23209001",
+  "customerType": "Corporate"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.body.number === "C001000002015CAD001Z", "Response isn't valid");
+});
+%}
+
+###create three accounts for one customerID without counter increment #2
+POST {{host}}/{{service}}/{{path}}/account/3050/1
+Content-Type: application/json
+
+{
+  "branch": "001",
+  "currencyCode": "FRF",
+  "flexcubeCustomerId": "000002015",
+  "customerId": "CIF111000002015",
+  "dealId": "CL23209001",
+  "customerType": "Corporate"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.body.number === "3050000002015FRF001M", "Response isn't valid");
+});
+%}
+
+###create three accounts for one customerID without counter increment #3
+POST {{host}}/{{service}}/{{path}}/account/6000/1
+Content-Type: application/json
+
+{
+  "branch": "002",
+  "currencyCode": "EUR",
+  "flexcubeCustomerId": "000002015",
+  "customerId": "CIF111000002015",
+  "dealId": "CL23209001",
+  "customerType": "Corporate"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.body.number === "6000000002015EUR001E", "Response isn't valid");
+});
+%}
+
+###get three accounts for one customerID without counter increment
+GET {{host}}/{{service}}/{{path}}/account/customer/000002015
+Content-Type: application/json
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.body.length === 3, "Account not found");
+});
+%}
+
+###check error in key calculation is corrected
+POST {{host}}/{{service}}/{{path}}/account/4101/1
+Content-Type: application/json
+
+{
+  "branch": "001",
+  "currencyCode": "INR",
+  "flexcubeCustomerId": "006126473",
+  "customerID": "CIF111006126473",
+  "dealId": "CL23209001",
+  "customerType": "Corporate"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.body.number === "4101006126473INR0020", "Response isn't valid");
+});
+%}
+
+###negative create an account without accountclass
+POST {{host}}/{{service}}/{{path}}/account/
+Content-Type: application/json
+
+{
+  "branch": "001",
+  "currencyCode": "INR",
+  "flexcubeCustomerId": "000002016",
+  "customerId": "CIF111000002016",
+  "dealId": "CL23209001",
+  "customerType": "Corporate"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 400, "Response status is not 400");
+  });
+%}
+
+###negative create an account with extended accountclass
+POST {{host}}/{{service}}/{{path}}/account/40000/1
+Content-Type: application/json
+
+{
+  "branch": "001",
+  "currencyCode": "INR",
+  "flexcubeCustomerId": "000002016",
+  "customerId": "CIF111000002016",
+  "dealId": "CL23209001",
+  "customerType": "Corporate"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 404, "Response status is not 404");
+  });
+  %}
+
+###negative create an account with shortened accountclass
+POST {{host}}/{{service}}/{{path}}/account/400/1
+Content-Type: application/json
+
+{
+  "branch": "001",
+  "currencyCode": "INR",
+  "flexcubeCustomerId": "000002016",
+  "customerId": "CIF111000002016",
+  "dealId": "CL23209001",
+  "customerType": "Corporate"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 404, "Response status is not 404");
+  });
+%}
+
+###negative create an account with a non-existent accountclass
+POST {{host}}/{{service}}/{{path}}/account/5544/1
+Content-Type: application/json
+
+{
+  "branch": "001",
+  "currencyCode": "INR",
+  "flexcubeCustomerId": "000000000002016",
+  "customerId": "CIF111000002016",
+  "dealId": "CL23209001",
+  "customerType": "Corporate"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 400, "Response status is not 400");
+  });
+%}
+
+###negative create an account witout branch
+POST {{host}}/{{service}}/{{path}}/account/4000/1
+Content-Type: application/json
+
+{
+  "branch": "",
+  "currencyCode": "INR",
+  "flexcubeCustomerId": "000002016",
+  "customerId": "CIF111000002016",
+  "dealId": "CL23209001",
+  "customerType": "Corporate"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 400, "Response status is not 400");
+  });
+%}
+
+###negative create an account with an extended branch
+POST {{host}}/{{service}}/{{path}}/account/
+Content-Type: application/json
+
+{
+  "branch": "000000000001",
+  "currencyCode": "INR",
+  "flexcubeCustomerId": "000002016",
+  "customerId": "CIF111000002016",
+  "dealId": "CL23209001",
+  "customerType": "Corporate"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 400, "Response status is not 400");
+  });
+%}
+
+###negative create an account with a shortened branch
+POST {{host}}/{{service}}/{{path}}/account/4000/1
+Content-Type: application/json
+
+{
+  "branch": "01",
+  "currencyCode": "INR",
+  "flexcubeCustomerId": "00002016",
+  "customerId": "CIF111000002016",
+  "dealId": "CL23209001",
+  "customerType": "Corporate"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 400, "Response status is not 400");
+  });
+%}
+
+###negative create an account with a non-existent branch
+POST {{host}}/{{service}}/{{path}}/account/4000/1
+Content-Type: application/json
+
+{
+  "branch": "999",
+  "currencyCode": "INR",
+  "flexcubeCustomerId": "00002016",
+  "customerId": "CIF111000002016",
+  "dealId": "CL23209001",
+  "customerType": "Corporate"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 400, "Response status is not 400");
+  });
+%}
+
+###negative create an account with Latin letters in branch
+POST {{host}}/{{service}}/{{path}}/account/4000/1
+Content-Type: application/json
+
+{
+  "branch": "USD",
+  "currencyCode": "INR",
+  "flexcubeCustomerId": "000002016",
+  "customerId": "CIF111000002016",
+  "dealId": "CL23209001",
+  "customerType": "Corporate"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 400, "Response status is not 400");
+  });
+%}
+
+###negative create an account with Cyrillic letters in branch
+POST {{host}}/{{service}}/{{path}}/account/4000/1
+Content-Type: application/json
+
+{
+  "branch": "АБВ",
+  "currencyCode": "INR",
+  "flexcubeCustomerId": "000002016",
+  "customerId": "CIF111000002016",
+  "dealId": "CL23209001",
+  "customerType": "Corporate"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 400, "Response status is not 400");
+  });
+%}
+
+###negative create an account with specisl chatters in branch
+POST {{host}}/{{service}}/{{path}}/account/4000/1
+Content-Type: application/json
+
+{
+  "branch": "#$%",
+  "currencyCode": "INR",
+  "flexcubeCustomerId": "000002016",
+  "customerId": "CIF111000002016",
+  "dealId": "CL23209001",
+  "customerType": "Corporate"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 400, "Response status is not 400");
+  });
+%}
+
+###negativecreate an account with no currency
+POST {{host}}/{{service}}/{{path}}/account/4000/1
+Content-Type: application/json
+
+{
+  "branch": "001",
+  "currencyCode": "",
+  "flexcubeCustomerId": "000002016",
+  "customerId": "CIF111000002016",
+  "dealId": "CL23209001",
+  "customerType": "Corporate"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 400, "Response status is not 400");
+  });
+%}
+
+###negative crete an account with extended currency
+POST {{host}}/{{service}}/{{path}}/account/4000/1
+Content-Type: application/json
+
+{
+  "branch": "001",
+  "currencyCode": "EURO",
+  "flexcubeCustomerId": "000002016",
+  "customerId": "CIF111000002016",
+  "dealId": "CL23209001",
+  "customerType": "Corporate"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 400, "Response status is not 400");
+  });
+%}
+
+###negative create an account with shortened currency
+POST {{host}}/{{service}}/{{path}}/account/4000/1
+Content-Type: application/json
+
+{
+  "branch": "001",
+  "currencyCode": "IN",
+  "flexcubeCustomerId": "000000000002016",
+  "customerId": "CIF111000002016",
+  "dealId": "CL23209001",
+  "customerType": "Corporate"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 400, "Response status is not 400");
+  });
+%}
+
+###negative create an account with non-existent currency
+POST {{host}}/{{service}}/{{path}}/account/4000/1
+Content-Type: application/json
+
+{
+  "branch": "001",
+  "currencyCode": "ABC",
+  "flexcubeCustomerId": "000000000002016",
+  "customerId": "CIF111000002016",
+  "dealId": "CL23209001",
+  "customerType": "Corporate"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 400, "Response status is not 400");
+  });
+%}
+
+###negative create an account with numbers in currency
+POST {{host}}/{{service}}/{{path}}/account/4000/1
+Content-Type: application/json
+
+{
+  "branch": "001",
+  "currencyCode": "136",
+  "flexcubeCustomerId": "000002016",
+  "customerId": "CIF111000002016",
+  "dealId": "CL23209001",
+  "customerType": "Corporate"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  });
+%}
+
+###negative create an account with special chatters in currency
+POST {{host}}/{{service}}/{{path}}/account/4000/1
+Content-Type: application/json
+
+{
+  "branch": "001",
+  "currencyCode": "%^&",
+  "flexcubeCustomerId": "000002016",
+  "customerId": "CIF111000002016",
+  "dealId": "CL23209001",
+  "customerType": "Corporate"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 400, "Response status is not 400");
+  });
+%}
+
+###negative create an account with Cyrillic letters in currency
+POST {{host}}/{{service}}/{{path}}/account/4000/1
+Content-Type: application/json
+
+{
+  "branch": "001",
+  "currencyCode": "РУБ",
+  "flexcubeCustomerId": "000000000002016",
+  "customerId": "CIF111000002016",
+  "dealId": "CL23209001",
+  "customerType": "Corporate"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 400, "Response status is not 400");
+  });
+%}
+
+###negative create an account with no flexcubeCustomerID
+POST {{host}}/{{service}}/{{path}}/account/4000/1
+Content-Type: application/json
+
+{
+  "branch": "001",
+  "currencyCode": "INR",
+  "flexcubeCustomerId": "",
+  "customerId": "CIF111000002016",
+  "dealId": "CL23209001",
+  "customerType": "Corporate"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 400, "Response status is not 400");
+  });
+%}
+
+###negative create an account with extended flexcubeCustomerId
+POST {{host}}/{{service}}/{{path}}/account/4000/1
+Content-Type: application/json
+
+{
+  "branch": "001",
+  "currencyCode": "INR",
+  "flexcubeCustomerId": "000000000002016",
+  "customerId": "CIF111000002016",
+  "dealId": "CL23209001",
+  "customerType": "Corporate"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 400, "Response status is not 400");
+  });
+%}
+
+###negative create an account with shortened flexcubeCustomerId
+POST {{host}}/{{service}}/{{path}}/account/4000/1
+Content-Type: application/json
+
+{
+  "branch": "01",
+  "currencyCode": "INR",
+  "flexcubeCustomerId": "00002016",
+  "customerId": "CIF111000002016",
+  "dealId": "CL23209001",
+  "customerType": "Corporate"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 400, "Response status is not 400");
+  });
+%}
+
+###negative create an account with special chatters in flexcubeCustomerID
+POST {{host}}/{{service}}/{{path}}/account/4000/1
+Content-Type: application/json
+
+{
+  "branch": "001",
+  "currencyCode": "INR",
+  "flexcubeCustomerId": "@#!%^&*()",
+  "customerId": "CIF111000002016",
+  "dealId": "CL23209001",
+  "customerType": "Corporate"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 400, "Response status is not 400");
+  });
+%}
+
+###negative create an account with Cyrillic letters in flexcubeCustomerID
+POST {{host}}/{{service}}/{{path}}/account/4000/1
+Content-Type: application/json
+
+{
+  "branch": "001",
+  "currencyCode": "INR",
+  "flexcubeCustomerId": "АБВГДЕЁЖЗ",
+  "customerId": "CIF111000002016",
+  "customerType": "Corporate"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 400, "Response status is not 400");
+  });
+%}
+
+###get an account by non-existent customerId
+GET {{host}}/{{service}}/{{path}}/account/customer/000022014
+Content-Type: application/json
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.body.length === 0, "Account not found");
+});
+%}
+
+###second similar account is not created #1
+POST {{host}}/{{service}}/{{path}}/account/4000/1
+Content-Type: application/json
+
+{
+  "branch": "001",
+  "currencyCode": "USD",
+  "flexcubeCustomerId": "000002020",
+  "dealId": "CL23209001",
+  "customerType": "Corporate"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.body.number === "4000000002020USD001G", "Response isn't valid");
+});
+%}
+
+###second similar account is not created #1
+POST {{host}}/{{service}}/{{path}}/account/4000/1
+Content-Type: application/json
+
+{
+  "branch": "001",
+  "currencyCode": "USD",
+  "flexcubeCustomerId": "000002025",
+  "dealId": "CL23209002",
+  "customerType": "Corporate"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.body.number === "4000000002025USD001E", "Response isn't valid");
+
+});
+%}
+
+###get only one account is created
+GET {{host}}/{{service}}/{{path}}/account/customer/000002025
+Content-Type: application/json
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.body.length === 1, "Account not found");
+});
+%}
+
+###create three accounts with counter increment #1
+POST {{host}}/{{service}}/{{path}}/account/4251/1
+Content-Type: application/json
+
+{
+  "branch": "001",
+  "currencyCode": "INR",
+  "flexcubeCustomerId": "000002027",
+  "customerId": "CIF111000002027",
+  "dealId": "CL23209001",
+  "customerType": "Corporate"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.body.number === "4251000002027INR001D", "Response isn't valid");
+});
+%}
+
+###create three accounts with counter increment #2
+POST {{host}}/{{service}}/{{path}}/account/4251/1
+Content-Type: application/json
+
+{
+  "branch": "001",
+  "currencyCode": "INR",
+  "flexcubeCustomerId": "000002027",
+  "customerId": "CIF111000002027",
+  "dealId": "CL23209002",
+  "customerType": "Corporate"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.body.number === "4251000002027INR002E", "Response isn't valid");
+});
+%}
+
+###create three accounts with counter increment #3
+POST {{host}}/{{service}}/{{path}}/account/4251/1
+Content-Type: application/json
+
+{
+  "branch": "001",
+  "currencyCode": "INR",
+  "flexcubeCustomerId": "000002027",
+  "customerId": "CIF111000002027",
+  "dealId": "CL23209003",
+  "customerType": "Corporate"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.body.number === "4251000002027INR003F", "Response isn't valid");
+});
+%}
+
+###get three accounts with counter increment
+GET {{host}}/{{service}}/{{path}}/account/customer/000002027
+Content-Type: application/json
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.body.length === 3, "Account not found");
+});
+%}
+
+

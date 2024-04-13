@@ -1,0 +1,60 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "branch": {
+      "type": "string"
+    },
+    "accountNumber": {
+      "type": "string"
+    },
+    "bookingDate": {
+      "type": "string"
+    },
+    "openingBalance": {
+      "type": "number"
+    },
+    "openingBalanceLocal": {
+      "type": "number"
+    },
+    "closingBalance": {
+      "type": "number"
+    },
+    "closingBalanceLocal": {
+      "type": "number"
+    },
+    "drTurnover": {
+      "type": "number"
+    },
+    "drTurnoverLocal": {
+      "type": "number"
+    },
+    "crTurnover": {
+      "type": "number"
+    },
+    "crTurnoverLocal": {
+      "type": "number"
+    },
+    "currencyCode": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "branch",
+    "accountNumber",
+    "bookingDate",
+    "openingBalance",
+    "openingBalanceLocal",
+    "closingBalance",
+    "closingBalanceLocal",
+    "drTurnover",
+    "drTurnoverLocal",
+    "crTurnover",
+    "crTurnoverLocal",
+    "currencyCode"
+  ]
+}

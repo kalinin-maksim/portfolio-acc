@@ -1,0 +1,3 @@
+flexcube:
+  api:
+    url: ${land.replication.url}/flex/proxy/land-flex-data

@@ -1,0 +1,24 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog  http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+
+    <changeSet id="20230101-insert_account_search_field_data" author="---">
+        <loadUpdateData file="data/20231101-account_class_data.csv" relativeToChangelogFile="true"
+                        tableName="${prefix}account_class"
+                        primaryKey="id"
+                        separator=";"
+                        encoding="UTF-8">
+            <column header="id" type="STRING"/>
+            <column header="side" type="STRING"/>
+        </loadUpdateData>
+        <loadUpdateData file="data/20231101-account_search_field_data.csv" relativeToChangelogFile="true"
+                        tableName="${prefix}account_search_field"
+                        primaryKey="account_class_id"
+                        separator=";"
+                        encoding="UTF-8">
+            <column header="account_class_id" type="STRING"/>
+            <column header="account_field" type="STRING"/>
+        </loadUpdateData>
+    </changeSet>
+</databaseChangeLog>

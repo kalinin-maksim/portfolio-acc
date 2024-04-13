@@ -1,0 +1,25 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog  http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+
+    <changeSet id="acc-insert-account_data" author="---">
+        <loadUpdateData file="data/20240201-account_data.csv" relativeToChangelogFile="true"
+                        tableName="${prefix}account"
+                        primaryKey="id"
+                        separator=";"
+                        encoding="UTF-8">
+            <column header="id" type="STRING"/>
+            <column header="branch" type="STRING"/>
+            <column header="currency_code" type="STRING"/>
+            <column header="flexcube_customer_id" type="STRING"/>
+            <column header="opening_date" type="DATE"/>
+            <column header="class_code" type="STRING"/>
+            <column header="maker" type="STRING"/>
+            <column header="checker" type="STRING"/>
+            <column header="state" type="STRING"/>
+            <column header="country" type="STRING"/>
+            <column header="customer_type" type="STRING"/>
+        </loadUpdateData>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="acc-alter_account_table" author="---">
+
+        <addColumn tableName="${prefix}account">
+            <column name="customer_type" type="varchar(32)"/>
+            <column name="maker" type="varchar(256)"/>
+            <column name="checker" type="varchar(256)"/>
+            <column name="country" type="varchar(4)"/>
+        </addColumn>
+
+    </changeSet>
+
+</databaseChangeLog>

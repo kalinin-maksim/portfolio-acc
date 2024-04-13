@@ -1,0 +1,37 @@
+openapi: 3.0.1
+info:
+  title: API
+  version: '1'
+paths:
+  /balance:
+    get:
+      tags:
+        - balance
+      summary: Balance
+      description: Returns balance
+      operationId: createPostingAndBalance
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: 'schema/AccountBalance.json'
+  /gl_balance:
+    get:
+      tags:
+        - gl_balance
+      summary: gl_balance
+      description: Returns gl_balance
+      operationId: getGlBalance
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: 'schema/AccountGLBalance.json'

@@ -1,0 +1,5 @@
+fc-accounting-adapter:
+  scheduler:
+    cron: "*/10 * * * * *"
+  general-ledger-balance-loader:
+    default-start-date: "2022-01-01"

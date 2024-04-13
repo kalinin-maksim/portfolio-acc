@@ -1,0 +1,19 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog  http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+
+    <changeSet id="20230101-insert_drools_data" author="---">
+        <loadUpdateData file="data/20231101-drools_data.csv" relativeToChangelogFile="true"
+                        tableName="${prefix}drools_rule"
+                        primaryKey="ID"
+                        separator=";"
+                        encoding="UTF-8">
+            <column header="ID" type="STRING"/>
+            <column header="name" type="STRING"/>
+            <column header="body" type="STRING"/>
+            <column header="when" type="STRING"/>
+            <column header="then" type="STRING"/>
+        </loadUpdateData>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,177 @@
+openapi: 3.0.1
+info:
+  title: API
+  version: '1'
+paths:
+  /account/{classId}/{glId}:
+    post:
+      tags:
+        - account
+      summary: Add a new account
+      description: Add a new account
+      operationId: addAccountWithParameters
+      parameters:
+        - in: path
+          name: classId
+          description: class id
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: glId
+          description: gl id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Create a new account
+        content:
+          application/json:
+            schema:
+              $ref: 'schema/AccountPostRq.json'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: 'schema/Account.json'
+        '405':
+          description: Invalid input
+  /account:
+    put:
+      tags:
+        - account
+      summary: Update an existing account
+      description: Update an existing account by Id
+      operationId: updateAccount
+      requestBody:
+        description: Update an existent account
+        content:
+          application/json:
+            schema:
+              $ref: 'schema/Account.json'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: 'schema/Account.json'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Account not found
+        '405':
+          description: Validation exception
+    post:
+      tags:
+        - account
+      summary: Add a new account
+      description: Add a new account
+      operationId: addAccount
+      requestBody:
+        description: Create a new account
+        content:
+          application/json:
+            schema:
+              $ref: 'schema/Account.json'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: 'schema/Account.json'
+        '405':
+          description: Invalid input
+  /account/{accountId}:
+    get:
+      tags:
+        - account
+      summary: Find account by ID
+      description: Returns a single account
+      operationId: getAccountById
+      parameters:
+        - name: accountId
+          in: path
+          description: ID of account to return
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: 'schema/Account.json'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Account not found
+    post:
+      tags:
+        - account
+      summary: Updates a account
+      description: ''
+      operationId: updateAccountWithState
+      parameters:
+        - name: accountId
+          in: path
+          description: ID of account that needs to be updated
+          required: true
+          schema:
+            type: string
+        - name: state
+          in: query
+          description: State of status
+          schema:
+            type: string
+      responses:
+        '405':
+          description: Invalid input
+    delete:
+      tags:
+        - account
+      summary: Deletes a account
+      description: delete a account
+      operationId: deleteAccount
+      parameters:
+        - name: accountId
+          in: path
+          description: account id to delete
+          required: true
+          schema:
+            type: string
+      responses:
+        '400':
+          description: Invalid account value
+  /account/customer/{customerId}:
+    get:
+      tags:
+        - account
+      summary: Find accounts by customerId
+      description: Returns a array of account
+      operationId: getAccountByCustomerId
+      parameters:
+        - name: customerId
+          in: path
+          description: ID of customer
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: 'schema/Account.json'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Account not found

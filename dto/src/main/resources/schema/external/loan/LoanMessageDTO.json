@@ -1,0 +1,136 @@
+{
+	"$schema": "http://json-schema.org/schema#",
+	"type": "object",
+	"title": "Event",
+	"required": [
+		"header",
+		"body"
+	],
+	"properties": {
+		"body": {
+			"oneOf": [
+				{
+					"$ref": "#/definitions/LoansDTO"
+				}
+			]
+		},
+		"header": {
+			"$ref": "#/definitions/BaseDTO"
+		},
+		"version": {
+			"type": "integer"
+		}
+	},
+	"definitions": {
+		"BaseDTO": {
+			"type": "object",
+			"required": [
+				"accountingId",
+				"systemId",
+				"moduleId",
+				"accountingEventType",
+				"dealType",
+				"reverse",
+				"multiOffset"
+			],
+			"properties": {
+				"accountingId": {
+					"type": "string"
+				},
+				"eventId": {
+					"type": "string"
+				},
+				"parentAccountingId": {
+					"type": "string"
+				},
+				"systemId": {
+					"type": "string"
+				},
+				"moduleId": {
+					"type": "string"
+				},
+				"accountingEventType": {
+					"type": "string"
+				},
+				"eventDate": {
+					"type": "string",
+					"pattern": "\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|1[0-9]|2[0-9]|3[0-1])"
+				},
+				"dealType": {
+					"type": "string"
+				},
+				"dealId": {
+					"type": "string"
+				},
+				"subDealId": {
+					"type": "string"
+				},
+				"operationTimeStamp": {
+					"type": "string",
+					"pattern": "\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|1[0-9]|2[0-9]|3[0-1])T(?:[01]\\d|2[0123]):([012345]\\d):([012345]\\d)((\\.\\d{1,6})?(([+\\-]\\d{2}:\\d{2})|Z)?)"
+				},
+				"reverse": {
+					"type": "boolean"
+				},
+				"multiOffset": {
+					"type": "boolean"
+				},
+				"amountBlockSystemCode": {
+					"type": "string"
+				},
+				"amountBlockId": {
+					"type": "string"
+				},
+				"operationCountryCode": {
+					"type": "string"
+				},
+				"operationBranchCode": {
+					"type": "string"
+				},
+				"maker": {
+					"type": "string"
+				},
+				"checker": {
+					"type": "string"
+				}
+			}
+		},
+		"LoansDTO": {
+			"type": "object",
+			"required": [
+				"currencyCode",
+				"eventAmount",
+				"valueDate"
+			],
+			"properties": {
+				"loanAccountNumber": {
+					"type": "string"
+				},
+				"customerId": {
+					"type": "string"
+				},
+				"currencyCode": {
+					"type": "string"
+				},
+				"eventAmount": {
+					"type": "number"
+				},
+				"valueDate": {
+					"type": "string",
+					"pattern": "\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|1[0-9]|2[0-9]|3[0-1])"
+				},
+				"startInterestAccrual": {
+					"type": "string",
+					"pattern": "\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|1[0-9]|2[0-9]|3[0-1])"
+				},
+				"endInterestAccrual": {
+					"type": "string",
+					"pattern": "\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|1[0-9]|2[0-9]|3[0-1])"
+				},
+				"loanContractNumber": {
+					"type": "string"
+				}
+			}
+		}
+	}
+}
